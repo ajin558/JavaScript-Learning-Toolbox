@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JS 学习工具箱</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <header class="header">
+      <div class="logo">JS</div>
+      <div><h1>网页小工具</h1><p>读取表格 · 检查元素样式</p></div>
+      <span class="version">0.3</span>
+    </header>
+    <div class="page-card">
+      <span class="page-mark">↗</span>
+      <div class="page-copy"><strong id="pageTitle">读取当前网页</strong><span id="pageHost">点击下方按钮开始</span></div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="网页工具">
+      <button class="tab active" role="tab" aria-selected="true" data-panel="scrape">网页转 JSON</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="tables">表格 CSV</button>
+      <button class="tab" role="tab" aria-selected="false" data-panel="inspect">样式检查</button>
+    </div>
+    <section class="panel" data-panel-view="scrape">
+      <div class="panel-heading"><div><h2>抓取当前页 → JSON</h2><p>读取浏览器已打开并渲染的页面</p></div><span class="heading-badge purple">JSON</span></div>
+      <div class="check-grid" aria-label="选择要提取的页面内容">
+        <label><input type="checkbox" data-scrape="headings" checked><span>标题</span></label>
+        <label><input type="checkbox" data-scrape="links" checked><span>链接</span></label>
+        <label><input type="checkbox" data-scrape="images" checked><span>图片</span></label>
+        <label><input type="checkbox" data-scrape="tables"><span>表格</span></label>
+        <label><input type="checkbox" data-scrape="jsonLd" checked><span>结构化数据</span></label>
+      </div>
+      <details class="custom-extract">
+        <summary>自定义提取商品 / 卡片字段</summary>
+        <div class="field-form">
+          <label>卡片选择器<input id="recordSelector" type="text" placeholder="例如：.product-card"></label>
+          <div class="field-grid">
+            <label>标题<input id="fieldTitle" type="text" placeholder="例如：.title"></label>
+            <label>价格<input id="fieldPrice" type="text" placeholder="例如：.price"></label>
+            <label>链接<input id="fieldLink" type="text" placeholder="例如：a"></label>
+            <label>图片<input id="fieldImage" type="text" placeholder="例如：img"></label>
+          </div>
+          <span>选择器针对每张卡片内部查询；留空的字段会跳过。</span>
+        </div>
+      </details>
+      <button class="primary-button full scrape-button" id="scrapePage"><span>⌕</span>抓取并生成 JSON</button>
+      <div class="table-status" id="scrapeStatus" aria-live="polite">页面标题和网址会自动包含在结果中。最多提取 200 项。</div>
+      <div class="json-preview-head"><span>JSON 预览</span><span id="jsonSize">尚无数据</span></div>
+      <pre class="json-preview" id="scrapePreview">点击上方按钮，抓取当前网页数据。</pre>
+      <div class="json-actions"><button class="secondary-button" id="copyJson" disabled>复制 JSON</button><button class="secondary-button" id="downloadJson" disabled>下载 .json</button></div>
+      <p class="footnote">数据只在本地浏览器处理。登录状态、动态加载、跨域 iframe 或反爬机制可能影响结果。</p>
+    </section>
+    <section class="panel" data-panel-view="tables">
+      <div class="panel-heading"><div><h2>导出网页表格</h2><p>查找当前网页里的标准 HTML 表格</p></div><span class="heading-badge">CSV</span></div>
+      <button class="primary-button full" id="readTables"><span>⌕</span>读取当前页面表格</button>
+      <div class="table-status" id="tableStatus" aria-live="polite">点击后会列出找到的表格。</div>
+      <div class="table-list" id="tableList"></div>
+      <button class="secondary-button full" id="exportTable" disabled>导出所选表格 CSV</button>
+      <p class="footnote">适用于页面中的普通 &lt;table&gt;；部分动态表格或 iframe 可能无法读取。</p>
+    </section>
+    <section class="panel" data-panel-view="inspect" hidden>
+      <div class="panel-heading"><div><h2>检查网页元素</h2><p>选中元素，读取布局与字体信息</p></div><span class="heading-badge purple">CSS</span></div>
+      <div class="inspect-preview"><div class="target-icon">⌖</div><div><strong>页面内浮动检查面板</strong><span>尺寸、坐标、字体、颜色、内外边距</span></div></div>
+      <button class="primary-button full" id="startInspect"><span>◉</span>在页面上开始选取</button>
+      <div class="table-status" id="inspectStatus" aria-live="polite">点按元素即可查看它的计算样式；按 Esc 暂停。</div>
+      <p class="footnote">检查面板可拖动。浏览器内部页和商店页不允许扩展注入。</p>
+    </section>
+    <footer><span class="local-dot"></span>只在你点击后读取当前标签页</footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

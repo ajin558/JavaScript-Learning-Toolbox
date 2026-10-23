@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "JS 学习工具箱",
+  "description": "抓取当前网页为 JSON，导出 HTML 表格，查看元素布局与样式。",
+  "version": "0.3.0",
+  "minimum_chrome_version": "96",
+  "permissions": ["activeTab", "scripting", "downloads"],
+  "action": {
+    "default_title": "JS 学习工具箱",
+    "default_popup": "popup.html"
+  }
+}

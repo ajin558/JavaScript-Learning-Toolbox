@@ -1,0 +1,15 @@
+# Operating systems
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary archives and logs
+*.zip
+*.log
+npm-debug.log*

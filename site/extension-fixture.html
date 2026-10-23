@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>扩展本地测试页｜布局、样式与网页转 JSON</title>
+  <meta name="description" content="用于本地验证网页布局测量、CSS 样式检查、链接和图片抓取、商品卡片选择器及表格 CSV 导出的测试页面。">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebPage","name":"扩展本地测试页","inLanguage":"zh-CN"}
+  </script>
+  <style>
+    :root { color-scheme: light; --ink:#1c2640; --muted:#68738b; --line:#dce2ef; --brand:#4e56d8; --wash:#f3f5fb; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#edf0f7; color:var(--ink); font:15px/1.65 "Microsoft YaHei",system-ui,sans-serif; }
+    .page { max-width:1160px; margin:28px auto; padding:0 22px; }
+    .hero { padding:26px 30px; border:1px solid var(--line); border-radius:18px; background:linear-gradient(120deg,#fff,#eef0ff); box-shadow:0 12px 30px #18244a10; }
+    .hero h1 { margin:0 0 7px; font-size:26px; line-height:1.3; letter-spacing:.2px; }
+    .hero p { max-width:760px; margin:0; color:var(--muted); }
+    .tag-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+    .tag { padding:4px 10px; border:1px solid #d8dafc; border-radius:999px; background:#fff; color:#4e56d8; font-size:12px; }
+    .layout { display:grid; grid-template-columns:220px minmax(0,1fr); gap:22px; margin-top:22px; align-items:start; }
+    .side,.section { border:1px solid var(--line); border-radius:14px; background:#fff; box-shadow:0 6px 20px #18244a08; }
+    .side { position:sticky; top:14px; padding:18px; }
+    .side h2 { margin:0 0 12px; font-size:15px; }
+    .side a { display:block; margin:7px 0; color:var(--brand); text-decoration:none; }
+    .content { min-width:0; }
+    .section { margin-bottom:18px; padding:20px; }
+    .section h2 { margin:0 0 13px; font-size:18px; }
+    .section-note { margin:-6px 0 15px; color:var(--muted); font-size:13px; }
+    .product-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .product-card { min-width:0; overflow:hidden; border:1px solid #dfe3ed; border-radius:12px; background:#fff; box-shadow:0 3px 10px #18244a0c; }
+    .product-card a { display:block; color:inherit; text-decoration:none; }
+    .product-art { display:grid; min-height:118px; place-items:center; background:linear-gradient(135deg,#e8ebff,#f5f6ff); }
+    .product-art img { width:80px; height:80px; padding:12px; border-radius:18px; background:#fff; }
+    .product-copy { padding:12px 14px 14px; }
+    .product-title { margin:0; font-size:14px; line-height:1.45; font-weight:650; }
+    .product-price { margin:8px 0 0; color:#cf3e58; font-size:18px; font-weight:700; }
+    .product-meta { margin:4px 0 0; color:var(--muted); font-size:11px; }
+    .type-samples { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .type-box { padding:13px; border:1px dashed #cdd4e5; border-radius:10px; background:#fafbfe; }
+    .type-box strong { display:block; color:#3e4770; }
+    .type-box p { margin:5px 0 0; }
+    .type-box .small { font-size:12px; line-height:1.45; }
+    .swatch-row { display:flex; gap:9px; align-items:center; margin-top:10px; }
+    .swatch { width:25px; height:25px; border:1px solid #0002; border-radius:7px; }
+    .table-wrap { overflow:auto; border:1px solid var(--line); border-radius:9px; }
+    table { width:100%; border-collapse:collapse; text-align:left; }
+    caption { padding:10px; background:#f5f6ff; font-weight:600; }
+    th,td { padding:9px 11px; border-top:1px solid var(--line); }
+    th { background:#fafbfe; }
+    .link-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; }
+    .link-grid a { overflow:hidden; color:#4852c7; font-size:12px; text-overflow:ellipsis; white-space:nowrap; }
+    .hint { color:var(--muted); font-size:12px; }
+    @media (max-width:760px) { .page{margin:14px auto;padding:0 12px}.layout{grid-template-columns:1fr}.side{position:static}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.link-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width:480px) { .hero{padding:20px}.hero h1{font-size:21px}.section{padding:15px}.product-grid,.type-samples{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <h1>浏览器扩展本地测试页</h1>
+      <p>用于检查元素宽高、视口与页面坐标、同层元素间距、字体和盒模型；也可测试 JSON 抓取、CSS 选择器及标准 HTML 表格导出。</p>
+      <div class="tag-row"><span class="tag">Grid / Flex</span><span class="tag">字体与颜色</span><span class="tag">商品卡片</span><span class="tag">表格 CSV</span><span class="tag">200 条上限</span></div>
+    </header>
+    <div class="layout">
+      <aside class="side">
+        <h2>测试导航</h2>
+        <a href="#products">商品卡片</a><a href="#typography">字体与盒模型</a><a href="#table">HTML 表格</a><a href="#many-links">大量链接</a>
+        <p class="hint">试着选中卡片标题、图片、边栏链接和表格单元格，再滚动页面观察坐标更新。</p>
+      </aside>
+      <main class="content">
+        <section class="section" id="products">
+          <h2>商品卡片与图片</h2>
+          <p class="section-note">自定义 JSON 选择器示例：卡片 <code>.product-card</code>，标题 <code>.product-title</code>，价格 <code>.product-price</code>，链接 <code>a</code>，图片 <code>img</code>。</p>
+          <div class="product-grid" id="productGrid"></div>
+        </section>
+        <section class="section" id="typography">
+          <h2>文字、布局和盒模型</h2>
+          <p class="section-note">这些卡片包含不同字号、字重、行高、内外边距、边框和颜色。</p>
+          <div class="type-samples">
+            <div class="type-box"><strong>标题文本 · 20px · 字重 700</strong><p>这段文字适合检查普通文本节点的尺寸、字号、行高和文字颜色。</p></div>
+            <div class="type-box"><strong class="small">辅助说明 · 12px · 行高 1.45</strong><p class="small">不同容器拥有独立的 padding、border、margin，便于比较 computed style 与实际矩形尺寸。</p></div>
+          </div>
+          <div class="swatch-row"><span class="swatch" style="background:#4e56d8"></span><span class="swatch" style="background:#cf3e58"></span><span class="swatch" style="background:#f2b84b"></span><span class="hint">选中色块查看背景颜色。</span></div>
+        </section>
+        <section class="section" id="table">
+          <h2>标准 HTML 表格</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>扩展 CSV 导出样例</caption>
+              <thead><tr><th>名称</th><th>描述</th><th>数值</th></tr></thead>
+              <tbody>
+                <tr><td>布局卡片</td><td>包含逗号，和中文</td><td>128.50</td></tr>
+                <tr><td>带引号样例</td><td>文字里有 "双引号"</td><td>96.00</td></tr>
+                <tr><td>折叠内容</td><td>页面导出时按可见尺寸识别</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="section" id="many-links">
+          <h2>大量链接性能样例</h2>
+          <p class="section-note">链接和卡片数量超过 200，用来观察抓取数量上限和截断提示。</p>
+          <div class="link-grid" id="linkGrid"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script>
+    const artwork = 'extension-fixture-art.svg';
+    const productGrid = document.querySelector('#productGrid');
+    for (let index = 1; index <= 210; index += 1) {
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.innerHTML = `<a href="#product-${index}" title="示例商品 ${index}"><span class="product-art"><img src="${artwork}" alt="示例商品 ${index} 图片"></span><div class="product-copy"><h3 class="product-title">示例商品 ${index} · 布局测试卡片</h3><p class="product-price">¥${(49.9 + index).toFixed(2)}</p><p class="product-meta">本地样例 · 间距与样式检查</p></div></a>`;
+      productGrid.append(card);
+    }
+    const linkGrid = document.querySelector('#linkGrid');
+    for (let index = 1; index <= 260; index += 1) {
+      const link = document.createElement('a');
+      link.href = `#link-${index}`;
+      link.textContent = `测试链接 ${String(index).padStart(3, '0')}`;
+      linkGrid.append(link);
+    }
+  </script>
+</body>
+</html>
