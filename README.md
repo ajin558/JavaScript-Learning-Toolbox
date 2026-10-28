@@ -16,6 +16,8 @@
 
 用浏览器打开 `site/index.html` 即可。也可以在 VS Code 安装 Live Server 后，右键 `index.html` 选择 **Open with Live Server**。
 
+在线体验：[JavaScript 学习工具箱](https://ajin558.github.io/JavaScript-Learning-Toolbox/)。网站由 GitHub Pages 发布；更新 `site/` 目录并推送到 `main` 后会自动重新部署。GitHub Pages 的国内网络可达性可能因地区和运营商而异。
+
 ## 安装浏览器扩展
 
 1. 打开 Chrome 的 `chrome://extensions`，或 Edge 的 `edge://extensions`。
