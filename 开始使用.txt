@@ -1,0 +1,24 @@
+JavaScript 学习工具箱｜解压即用
+==================================
+
+一、使用网页工具
+1. 将压缩包完整解压到一个文件夹。
+2. 打开解压后的 site 文件夹。
+3. 双击 index.html，用 Chrome 或 Edge 打开。
+4. 在 JSON 工具中粘贴内容，即可格式化或校验 JSON。
+
+网页工具在浏览器本地运行，不需要安装 Node.js，也不会把输入内容上传。
+
+二、可选：安装浏览器扩展
+1. 在地址栏打开 chrome://extensions（Chrome）或 edge://extensions（Edge）。
+2. 开启“开发者模式”。
+3. 点击“加载已解压的扩展”，选择解压目录中的 extension 文件夹。
+4. 打开普通网页，点击浏览器工具栏中的“JS 学习工具箱”。
+
+浏览器内部页面、扩展商店页和部分受保护页面不允许扩展读取。
+
+三、在线使用
+项目的 GitHub Pages 发布设置尚未完成。启用 Pages 并等待部署成功后，
+才可以通过 https://ajin558.github.io/JavaScript-Learning-Toolbox/ 在线使用。
+
+源码仓库：https://github.com/ajin558/JavaScript-Learning-Toolbox

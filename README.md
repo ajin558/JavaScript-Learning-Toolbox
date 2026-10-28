@@ -16,7 +16,7 @@
 
 用浏览器打开 `site/index.html` 即可。也可以在 VS Code 安装 Live Server 后，右键 `index.html` 选择 **Open with Live Server**。
 
-在线体验：[JavaScript 学习工具箱](https://ajin558.github.io/JavaScript-Learning-Toolbox/)。网站由 GitHub Pages 发布；更新 `site/` 目录并推送到 `main` 后会自动重新部署。GitHub Pages 的国内网络可达性可能因地区和运营商而异。
+GitHub Pages 部署工作流已配置。仓库管理员在 **Settings → Pages** 将 **Source** 设为 **GitHub Actions** 后，网页会发布到 [在线体验地址](https://ajin558.github.io/JavaScript-Learning-Toolbox/)；之后更新 `site/` 并推送到 `main` 会自动重新部署。GitHub Pages 的国内网络可达性可能因地区和运营商而异。
 
 ## 安装浏览器扩展
 
